@@ -1,13 +1,16 @@
 package handlers
 
 import (
-	"github.com/doniacld/first-step-sql/domain"
-	"github.com/doniacld/first-step-sql/rest"
 	"github.com/gorilla/mux"
+
+	"github.com/doniacld/first-step-sql/internal/db"
+	"github.com/doniacld/first-step-sql/internal/domain"
+	"github.com/doniacld/first-step-sql/rest"
 )
 
 // Service holds service dependency
 type Service struct {
+	db db.StudentDB
 }
 
 // Router returns the service's endpoints
@@ -31,6 +34,6 @@ func (s Service) Router() *mux.Router {
 }
 
 // NewService instantiates a new service
-func NewService() Service {
-	return Service{}
+func NewService(db db.StudentDB) Service {
+	return Service{db: db}
 }

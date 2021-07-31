@@ -1,12 +1,7 @@
 version: '3.8'
 services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-
   db:
-    container_name: pg_container
+    container_name: db
     image: postgres
     restart: always
     env_file:
@@ -17,5 +12,15 @@ services:
       - pg_data:/var/lib/postgresql/data/
       # copy the sql script to create tables
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  app:
+    container_name: app
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - database.env
+    depends_on:
+      - db
 volumes:
   pg_data:
+

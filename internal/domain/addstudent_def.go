@@ -21,10 +21,10 @@ type AddRequest struct {
 	Phone       string `json:"phone"`
 	Email       string `json:"email"`
 	Address     string `json:"address"`
-	Postcode    string `json:"postcode"`
+	Postcode    int `json:"postcode"`
 	DateOfBirth string `json:"dateOfBirth"`
 }
 
-// AddResponse defines the endoint's response
+// AddResponse defines the endpoint's response
 type AddResponse struct {
 }

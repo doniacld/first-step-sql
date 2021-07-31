@@ -4,27 +4,28 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
-	"github.com/doniacld/first-step-sql/domain"
+	"github.com/doniacld/first-step-sql/internal/domain"
 )
 
 // Add calls the endpoint and writes the output
 func (s Service) Add(w http.ResponseWriter, r *http.Request) {
-	// Search calls the endpoint and writes the output
-	request, err := decodeRequest(r)
+	// SearchByName calls the endpoint and writes the output
+	request, err := decodeAddRequest(r)
 	if err != nil {
 		return
 	}
 
-	// TODO implement the business
-	fmt.Println(request)
+	domain.AddStudent(request, s.db)
+	log.Printf("student %s %s has been added", request.FirstName, request.LastName)
 
-	encodeResponse(w)
+	encodeAddResponse(w)
 }
 
 // decodeSearchRequest decodes the json request
-func decodeRequest(r *http.Request) (domain.AddRequest, error) {
+func decodeAddRequest(r *http.Request) (domain.AddRequest, error) {
 	var req domain.AddRequest
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -37,7 +38,7 @@ func decodeRequest(r *http.Request) (domain.AddRequest, error) {
 	return req, nil
 }
 
-// encodeResponse encodes the response
-func encodeResponse(w http.ResponseWriter) {
+// encodeAddResponse encodes the response
+func encodeAddResponse(w http.ResponseWriter) {
 	w.WriteHeader(domain.AddEndpointMeta.SuccessCode())
 }

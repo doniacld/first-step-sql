@@ -51,5 +51,5 @@ dockerc_up:
 dockerc_down:
 		$(DOCKERCDOWN)
 docker_exec_db:
-		$(DOCKEREXEC) pg_container bash
+		$(DOCKEREXEC) db bash
 
