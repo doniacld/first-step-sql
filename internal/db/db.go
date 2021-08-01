@@ -14,7 +14,7 @@ type Student struct {
 
 // StudentDB provides different methods to the db
 type StudentDB interface {
-	AddStudent(s Student)
+	AddStudent(s Student) error
 	SearchByName(firstName string, lastName string) (Student, error)
 
 	Close() error

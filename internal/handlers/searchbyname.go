@@ -13,12 +13,13 @@ import (
 func (s Service) SearchByName(w http.ResponseWriter, r *http.Request) {
 	request, err := decodeSearchByNameRequest(r)
 	if err != nil {
+		writeError(w, http.StatusBadRequest, err)
 		return
 	}
 
 	resp, err := domain.SearchByName(request, s.db)
 	if err != nil {
-		w.WriteHeader(http.StatusFailedDependency)
+		writeError(w, http.StatusFailedDependency, err)
 	}
 	encodeSearchByNameResponse(resp, w)
 }
@@ -41,7 +42,7 @@ func decodeSearchByNameRequest(r *http.Request) (domain.SearchByNameRequest, err
 func encodeSearchByNameResponse(response domain.SearchByNameResponse, w http.ResponseWriter) {
 	b, err := json.Marshal(response)
 	if err != nil {
-		w.WriteHeader(http.StatusFailedDependency)
+		writeError(w, http.StatusFailedDependency, err)
 		return
 	}
 

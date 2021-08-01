@@ -16,7 +16,7 @@ curl -v -X POST http://0.0.0.0:8080/students -d@test/add-student-request.jsoN
 ### Postgres
     psql -h db -d test_db -U root
 
-
+INSERT INTO students (first_name, last_name, city, phone, email, address, postcode, date_of_birth) VALUES ('titi', 'toto', 'toto', '05144461974', 'toto', 'toto', 123, '2001-12-16');
 
 ## To improve
 

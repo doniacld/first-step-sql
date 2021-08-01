@@ -55,7 +55,7 @@ func New(username, password, database string) (db.StudentDB, error) {
 
 	err = pingDB(conn, 3)
 	if err != nil {
-	//	return nil, fmt.Errorf("ping database failed: %s", err)
+		return nil, fmt.Errorf("ping database failed: %s", err)
 	}
 
 	log.Println("Database connection established")

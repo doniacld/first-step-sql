@@ -12,13 +12,18 @@ import (
 
 // Add calls the endpoint and writes the output
 func (s Service) Add(w http.ResponseWriter, r *http.Request) {
-	log.Printf("Attempting to decode AddRequest %#v", r.Body)
+	log.Printf("Attempting to decode AddStudentRequest")
 	request, err := decodeAddRequest(r)
 	if err != nil {
+		writeError(w, http.StatusBadRequest, err)
 		return
 	}
 
-	domain.AddStudent(request, s.db)
+	_, err = domain.AddStudent(request, s.db)
+	if err != nil {
+		writeError(w, http.StatusBadRequest, err)
+		return
+	}
 	log.Printf("student %s %s has been added", request.FirstName, request.LastName)
 
 	encodeAddResponse(w)
@@ -33,7 +38,7 @@ func decodeAddRequest(r *http.Request) (domain.AddRequest, error) {
 	}
 	err = json.Unmarshal(body, &req)
 	if err != nil {
-		return domain.AddRequest{}, err
+		return domain.AddRequest{}, fmt.Errorf("unable to unmarshal the body, %v", err)
 	}
 	return req, nil
 }
