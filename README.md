@@ -6,8 +6,16 @@ Building a dummy Golang service using SQL.
 
 ## How to run
 
+
+    docker exec app ping db
+
+    
+curl -v -X POST http://0.0.0.0:8080/students -d@test/add-student-request.jsoN
+
+
 ### Postgres
     psql -h db -d test_db -U root
+
 
 
 ## To improve

@@ -19,9 +19,8 @@ func (s Service) Router() *mux.Router {
 
 	// list all the endpoints
 	routes := []rest.Route{
-		{
-			domain.AddEndpointMeta, s.Add,
-		},
+		{domain.AddEndpointMeta, s.Add},
+		{domain.SearchByNameEndpointMeta, s.SearchByName},
 	}
 
 	for _, r := range routes {

@@ -21,7 +21,7 @@ type AddRequest struct {
 	Phone       string `json:"phone"`
 	Email       string `json:"email"`
 	Address     string `json:"address"`
-	Postcode    int `json:"postcode"`
+	Postcode    int    `json:"postcode"`
 	DateOfBirth string `json:"dateOfBirth"`
 }
 

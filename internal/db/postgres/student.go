@@ -29,6 +29,7 @@ func (s *studentDB) SearchByName(firstName string, lastName string) (db.Student,
 	var student db.Student
 	sqlStatement := ` SELECT * FROM ` + studentsTable + `WHERE firstName=$1 AND lastName=$2;`
 	row := s.conn.QueryRow(sqlStatement, firstName, lastName)
+
 	err := row.Scan(&student.FirstName, &student.LastName, &student.DateOfBirth, &student.Postcode, &student.Address,
 		&student.Email, &student.Phone, &student.City)
 	switch err {

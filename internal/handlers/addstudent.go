@@ -12,7 +12,7 @@ import (
 
 // Add calls the endpoint and writes the output
 func (s Service) Add(w http.ResponseWriter, r *http.Request) {
-	// SearchByName calls the endpoint and writes the output
+	log.Printf("Attempting to decode AddRequest %#v", r.Body)
 	request, err := decodeAddRequest(r)
 	if err != nil {
 		return

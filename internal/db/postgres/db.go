@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/doniacld/first-step-sql/internal/db"
-	_ "github.com/lib/pq" // needed to establish the connection with the driver even it is not instantiate
+	_ "github.com/lib/pq" // to establish the connection with the driver even it is not instantiate
 )
 
 /*
@@ -43,12 +43,9 @@ type studentDB struct {
 }
 
 func New(username, password, database string) (db.StudentDB, error) {
-	connStr := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable",
-		username,
-		password,
-		HOST,
-		PORT,
-		database)
+
+	connStr := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=disable", HOST, PORT, username, password, database)
 
 	log.Printf(connStr)
 	conn, err := sql.Open("postgres", connStr)
@@ -56,9 +53,9 @@ func New(username, password, database string) (db.StudentDB, error) {
 		return nil, fmt.Errorf("could not open a new connection: %s", err)
 	}
 
-	err = pingDB(conn, 10)
+	err = pingDB(conn, 3)
 	if err != nil {
-		return nil, fmt.Errorf("ping database failed: %s", err)
+	//	return nil, fmt.Errorf("ping database failed: %s", err)
 	}
 
 	log.Println("Database connection established")
