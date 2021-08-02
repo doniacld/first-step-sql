@@ -35,7 +35,7 @@ help:
 	@echo "clean               : Remove temporary files"
 
 build:
-		$(GOBUILD) -o $(BINARY_PATH).out -v $(SOURCE_ENTRYPOINT)
+		env GOOS=linux GOARCH=386 $(GOBUILD) -o $(BINARY_PATH).out -v $(SOURCE_ENTRYPOINT)
 test:
 		$(GOTEST) -v ./...
 test_cover:

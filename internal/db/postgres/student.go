@@ -13,8 +13,8 @@ const (
 )
 
 func (s *studentDB) AddStudent(st db.Student) error {
-	sqlStatement := `INSERT INTO` + studentsTable + `(first_name, last_name, city, phone, email, address, postcode, date_of_birth)
-VALUES ($1, $2, $3, $4, $5, $6, $7)
+	sqlStatement := `INSERT INTO ` + studentsTable + `(first_name, last_name, city, phone, email, address, postcode, date_of_birth)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 RETURNING id;`
 	log.Printf("query row %s", sqlStatement)
 	row := s.conn.QueryRow(sqlStatement, st.FirstName, st.LastName, st.City, st.Phone, st.Email, st.Address, st.Postcode, st.DateOfBirth)
