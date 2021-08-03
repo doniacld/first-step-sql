@@ -35,14 +35,11 @@ help:
 	@echo "clean               : Remove temporary files"
 
 build:
-		env GOOS=linux GOARCH=386 $(GOBUILD) -o $(BINARY_PATH).out -v $(SOURCE_ENTRYPOINT)
+		$(GOBUILD) -o $(BINARY_PATH).out -v $(SOURCE_ENTRYPOINT)
 test:
 		$(GOTEST) -v ./...
 test_cover:
 		$(GOTEST) -v ./... -coverprofile=coverage.txt -covermode=atomic
-run:
-	@echo "Run the program"
-	$(GORUN) $(SOURCE_ENTRYPOINT)
 clean:
 		$(GOCLEAN) $(SOURCE_ENTRYPOINT)
 		rm -f $(BINARY_PATH)

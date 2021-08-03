@@ -10,7 +10,8 @@ Building a dummy Golang service using SQL.
     docker exec app ping db
 
     
-curl -v -X POST http://0.0.0.0:8080/students -d@test/add-student-request.jsoN
+curl -v -X POST http://0.0.0.0:8080/students -d@test/add-student-request.json
+curl -v -X POST http://0.0.0.0:8080/students/search -d@test/search-by-name-request.json
 
 
 ### Postgres
